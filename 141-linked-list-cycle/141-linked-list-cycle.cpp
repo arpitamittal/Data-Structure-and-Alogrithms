@@ -9,17 +9,16 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        if(head==NULL) return false;
-        ListNode *fast = head;
-        ListNode *slow = head;
-        while(fast->next!=NULL && fast->next->next!=NULL)
+        unordered_set<ListNode*> mp;
+        while(head != NULL)
         {
-            fast = fast->next->next;
-            slow = slow->next;
-            if(fast==slow) return true;
+            if(mp.find(head) != mp.end())
+                return true;
+            mp.insert(head);
+            head = head->next;
         }
         return false;
     }
 // T.C. :- O(n) List is traversed once
-// S.C. :- O(1) 
+// S.C. :- O(n) 
 };
