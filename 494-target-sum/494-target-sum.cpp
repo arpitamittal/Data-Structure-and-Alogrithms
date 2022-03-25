@@ -4,7 +4,7 @@ public:
         unordered_map<string, int> mp;
        return totalWays(nums, 0, target, mp); 
     }
-    int totalWays(vector<int>& nums, int current, int target, unordered_map<string, int> &mp)
+    int totalWays(vector<int> nums, int current, int target, unordered_map<string, int> &mp)
     {
         if(current == nums.size() && target == 0)
             return 1;
