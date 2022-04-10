@@ -14,8 +14,8 @@ public:
                 ans.push_back(stoi(ops[i]));
         }
         int sum = 0;
-        for(int i : ans)
-            sum += i;
+        for(auto it : ans)
+            sum += it;
         return sum;
     }
 };
