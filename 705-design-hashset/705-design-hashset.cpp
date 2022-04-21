@@ -4,7 +4,7 @@ public:
     int size;
     MyHashSet() 
     {
-        size = 1e6 + 1;
+        size = 100;
         vec.resize(size);
     }
     int hash(int key)
