@@ -4,7 +4,7 @@ public:
     int size;
     MyHashMap() 
     {
-        size = 1e6;
+        size = 100;
         li.resize(size);
     }
     int hash(int key)
