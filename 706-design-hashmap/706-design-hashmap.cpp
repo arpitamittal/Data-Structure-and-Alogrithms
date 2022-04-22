@@ -1,27 +1,47 @@
 class MyHashMap {
 public:
-    vector<int> li;
+    vector<list<pair<int, int>>> li;
     int size;
     MyHashMap() 
     {
-        size = 1e6 + 1;
+        size = 1e6;
         li.resize(size);
-        fill(li.begin(), li.end(), -1);
     }
-    
+    int hash(int key)
+    {
+        return key % size;
+    }
+    list<pair<int, int>> :: iterator search(int key)
+    {
+        int idx = hash(key);
+        list<pair<int, int>> :: iterator it = li[idx].begin();
+        while(it != li[idx].end())
+        {
+            if(it->first == key) return it;
+            it++;
+        }
+        return it;
+    }
     void put(int key, int value) 
     {
-        li[key] = value;
+        int idx = hash(key);
+        remove(key);
+        li[idx].push_back({key, value});
     }
     
     int get(int key) 
     {
-        return li[key];
+        int idx = hash(key);
+        list<pair<int, int>> :: iterator it = search(key);
+        if(it == li[idx].end()) return -1;
+        else return it->second;
     }
     
     void remove(int key) 
     {
-        li[key] = -1;
+        int idx = hash(key);
+        auto it = search(key);
+        if(it != li[idx].end()) li[idx].erase(search(key));
     }
 };
 
