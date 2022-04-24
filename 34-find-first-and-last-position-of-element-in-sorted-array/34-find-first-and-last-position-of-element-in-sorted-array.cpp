@@ -2,11 +2,9 @@ class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
         int size = nums.size();
-        if(size == 0 ) return {-1, -1};
         int last = lower_bound(nums.begin(), nums.end(), target+1) - nums.begin() ;
         last--;
         if(last < 0 || target != nums[last]) return {-1, -1 };
-       // cout<<last <<" ";
         int first = upper_bound(nums.begin(), nums.end(), target - 1) - nums.begin();        
         return {first, last};
     }
