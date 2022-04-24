@@ -1,47 +1,13 @@
 class Solution {
 public:
-    int firstOccurence(vector<int> &nums, int start, int end, int target)
-    {
-        int ans = -1;
-        while(start <= end)
-        {
-            int mid = start + (end - start)/2;
-            if(nums[mid] == target)
-            {
-                ans = mid;
-                end = mid - 1;
-            }
-            else if(target > nums[mid])
-                start = mid + 1;
-            else
-                end = mid - 1;
-        }
-        return ans;
-    }
-    int lastOccurence(vector<int> &nums, int start, int end, int target)
-    {
-        int ans = -1;
-        while(start <= end)
-        {
-            int mid = start + (end - start)/2;
-            if(nums[mid] == target)
-            {
-                ans = mid;
-                start = mid + 1;
-            }
-            else if(target > nums[mid])
-                start = mid + 1;
-            else
-                end = mid - 1;
-        }
-        return ans;
-    }
     vector<int> searchRange(vector<int>& nums, int target) {
         int size = nums.size();
-        int first = firstOccurence(nums, 0, size-1, target); 
-        if(first == -1) 
-            return {-1,-1};
-        int last = lastOccurence(nums, 0, size - 1, target);
+        if(size == 0 ) return {-1, -1};
+        int last = lower_bound(nums.begin(), nums.end(), target+1) - nums.begin() ;
+        last--;
+        if(last < 0 || target != nums[last]) return {-1, -1 };
+       // cout<<last <<" ";
+        int first = upper_bound(nums.begin(), nums.end(), target - 1) - nums.begin();        
         return {first, last};
     }
 };
@@ -56,4 +22,8 @@ public:
  non - decreasing -> increasing order (non strictly increasing)
  
  
+ lower ,  target +1 ->
+ lower , target - 1 
+ upper , traget - 1
+ upper , target +1 
 */
