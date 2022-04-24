@@ -38,7 +38,9 @@ public:
     }
     vector<int> searchRange(vector<int>& nums, int target) {
         int size = nums.size();
-        int first = firstOccurence(nums, 0, size-1, target);  
+        int first = firstOccurence(nums, 0, size-1, target); 
+        if(first == -1) 
+            return {-1,-1};
         int last = lastOccurence(nums, 0, size - 1, target);
         return {first, last};
     }
