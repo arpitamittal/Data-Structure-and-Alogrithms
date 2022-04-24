@@ -1,17 +1,46 @@
 class Solution {
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
-        int n = nums.size();
-        int left = -1, right = -1;
-        for(int i=0; i<n; i++)
+    int firstOccurence(vector<int> &nums, int start, int end, int target)
+    {
+        int ans = -1;
+        while(start <= end)
         {
-            if(nums[i] == target)
+            int mid = start + (end - start)/2;
+            if(nums[mid] == target)
             {
-                if(left == -1)  left = i;
-                right = i;         
+                ans = mid;
+                end = mid - 1;
             }
+            else if(target > nums[mid])
+                start = mid + 1;
+            else
+                end = mid - 1;
         }
-        return {left, right};
+        return ans;
+    }
+    int lastOccurence(vector<int> &nums, int start, int end, int target)
+    {
+        int ans = -1;
+        while(start <= end)
+        {
+            int mid = start + (end - start)/2;
+            if(nums[mid] == target)
+            {
+                ans = mid;
+                start = mid + 1;
+            }
+            else if(target > nums[mid])
+                start = mid + 1;
+            else
+                end = mid - 1;
+        }
+        return ans;
+    }
+    vector<int> searchRange(vector<int>& nums, int target) {
+        int size = nums.size();
+        int first = firstOccurence(nums, 0, size-1, target);  
+        int last = lastOccurence(nums, 0, size - 1, target);
+        return {first, last};
     }
 };
 /*
@@ -24,7 +53,5 @@ public:
  [2,5,13,]
  non - decreasing -> increasing order (non strictly increasing)
  
- i=0  
  
-left = 0, rigt
 */
