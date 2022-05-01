@@ -7,18 +7,21 @@
  *     ListNode(int x) : val(x), next(nullptr) {}
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
+     
+     7 <- 2 <- 4 <- 3
+                    p         
  */
 class Solution {
 public:
     ListNode * reverse(ListNode *head)
     {
-        ListNode *prev = NULL, *curr = head, *n = head->next;
+        ListNode *prev = NULL, *curr = head, *next = head->next;
         while(curr != NULL)
         {
             curr->next = prev;
             prev = curr;
-            curr = n;
-            if(n != NULL) n = n->next;
+            curr = next;
+            if(next != NULL) next = next->next;
         }
         return prev;
     }
