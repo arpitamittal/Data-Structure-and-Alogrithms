@@ -1,47 +1,45 @@
 class MyStack {
-    queue<int> q1, q2;
-    int len;
 public:
+    queue<int> q;
+
+    int peek = -1;  
+    
     MyStack() 
     {
-       len = 0;
+       
     }
     
     void push(int x) 
     {
-        len++;
-        q2.push(x);
-        while(!q1.empty())
-        {
-            q2.push(q1.front());
-            q1.pop();
-        } 
-        queue<int> q = q1;
-        q1 = q2;
-        q2 = q;
+        peek = x;
+        q.push(x);
     }
     
-    int pop()
+    int pop() 
     {
-        if(q1.empty())
-           return -1;
+       int n = q.size();
+       n-=1; 
+       while(n--)
+       {
+          peek = q.front();     // maintining the top element 
+           q.push(peek);
+           q.pop();
+       } 
         
-        int top = q1.front();
-        q1.pop();
-        len--;
-        return top;
+       int ret = q.front();     // storing the element to return 
+       q.pop();                // removing the element permanently
+        
+        return ret;    
     }
     
     int top() 
     {
-        if(q1.empty())
-            return -1;
-        return q1.front();
+        return peek; 
     }
     
     bool empty() 
     {
-        return q1.empty();
+        return q.size()==0;
     }
 };
 
