@@ -32,11 +32,11 @@ public:
     {
         auto last = --history.end();
         
-        while(steps > 0)
+        while(steps--)
         {
             if(it == last) break;
             it++;
-            steps--;
+           // steps--;
         }
         return *it;
     }
