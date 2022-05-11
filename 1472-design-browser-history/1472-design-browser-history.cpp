@@ -23,20 +23,17 @@ public:
         {
             if(it == history.begin()) break;
             it--;
-            //steps--;
         }
         return *it;
     }
     
     string forward(int steps) 
     {
-        auto last = --history.end();
-        
-        while(steps--)
+        //auto last = --history.end();
+        while(steps-- && it  != (--history.end()))
         {
-            if(it == last) break;
+            //if(it == last) break;
             it++;
-           // steps--;
         }
         return *it;
     }
