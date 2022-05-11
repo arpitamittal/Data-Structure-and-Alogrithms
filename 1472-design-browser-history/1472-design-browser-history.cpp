@@ -19,11 +19,11 @@ public:
     
     string back(int steps) 
     {
-        while(steps > 0)
+        while(steps--)
         {
             if(it == history.begin()) break;
             it--;
-            steps--;
+            //steps--;
         }
         return *it;
     }
