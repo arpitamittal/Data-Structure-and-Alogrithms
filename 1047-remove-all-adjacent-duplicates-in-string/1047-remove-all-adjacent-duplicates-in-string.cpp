@@ -1,25 +1,42 @@
 class Solution {
 public:
-    string removeDuplicates(string s) {
-        string ans="";
-        
-        for(int i=0;i<s.size();i++)
+    /*
+    abbaca
+         stack :- a
+                  a  b
+                  a      b  b
+                         a  a
+                  c  
+                  c  a
+    azxxzy
+         stack :- a
+                  a  z
+                  a  z  x
+                  a  z       x  x
+                  a          z  z  
+                  a  y
+    
+    */
+    string removeDuplicates(string str) {
+        stack<int> s;
+        for(auto it : str)
         {
-            if(s.size()==0)
-            {
-                ans.push_back(s[i]);
-            }
-            
-            else if(s[i]!=ans.back())
-            {
-                ans.push_back(s[i]);
-            }
+            if(s.empty()) s.push(it);
             else
             {
-                ans.pop_back();
+                if(s.top() == it)
+                    s.pop();
+                else
+                    s.push(it);
             }
         }
-        
+        string ans;
+        while(!s.empty())
+        {
+            ans += s.top();
+            s.pop();
+        }
+        reverse(ans.begin(), ans.end());
         return ans;
     }
 };
