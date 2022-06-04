@@ -6,28 +6,27 @@ public:
             totalSum += num;
         if(totalSum % 2 != 0) 
             return false;
-        unordered_map<string, bool> mp;
-        return isPossible(nums, totalSum/2, 0, mp);
+        vector<vector<int>> dp(nums.size(), vector<int>((totalSum/2)+1, -1));
+        return isPossible(nums, totalSum/2, 0, dp);
     }
-    int isPossible(vector<int> &nums, int target, int currentIndex, unordered_map<string, bool> &mp)
+    int isPossible(vector<int> &nums, int target, int currentIndex, vector<vector<int>> &dp)
     {
         if(target == 0)
             return true;
         if(currentIndex >= nums.size())
             return false;
-        string currentKey = to_string(target) + " " + to_string(currentIndex);
-        if(mp.find(currentKey) != mp.end())
-            return mp[currentKey];
+        if(dp[currentIndex][target] != -1)
+            return dp[currentIndex][target];
         bool consider = false;
         if(nums[currentIndex] <= target)
-            consider = isPossible(nums, target - nums[currentIndex], currentIndex+1, mp);
+            consider = isPossible(nums, target - nums[currentIndex], currentIndex+1, dp);
         if(consider)
         {
-            mp[currentKey] = consider;
+            dp[currentIndex][target] = consider;
             return true;
         }
-        int notConsider = isPossible(nums, target, currentIndex+1, mp);
-        mp[currentKey] = consider || notConsider;
-        return mp[currentKey];
+        int notConsider = isPossible(nums, target, currentIndex+1, dp);
+        dp[currentIndex][target] = consider || notConsider;
+        return dp[currentIndex][target];
     }
 };
