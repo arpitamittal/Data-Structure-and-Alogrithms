@@ -11,7 +11,7 @@ class Solution
     int knapSack(int w, int weight[], int profit[], int n) 
     { 
        // Your code here
-       vector<vector<int>> dp(n, vector<int> (w+1, -1));
+       vector<vector<int>> dp(n, vector<int> (w, -1));
        return maxProfit(w, weight, 0, profit, n, dp);
     }
     int maxProfit(int capacity, int weight[], int curr, int profit[], int n, vector<vector<int>> &dp)
@@ -25,8 +25,8 @@ class Solution
         
         // if(mp.find(currentKey) != mp.end())
         //     return mp[currentKey];
-        if(dp[curr][capacity] != -1)
-            return dp[curr][capacity];
+        if(dp[curr][capacity-1] != -1)
+            return dp[curr][capacity-1];
             
         int consider = 0;
         if(capacity >= currentItemWeight)
@@ -34,9 +34,9 @@ class Solution
            
         int notConsider = maxProfit(capacity, weight, curr+1, profit, n, dp);
         
-        dp[curr][capacity] = max(consider, notConsider);
+        dp[curr][capacity-1] = max(consider, notConsider);
         
-        return dp[curr][capacity];
+        return dp[curr][capacity-1];
     }
 };
 
