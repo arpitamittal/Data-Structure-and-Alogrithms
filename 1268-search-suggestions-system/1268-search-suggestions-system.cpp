@@ -2,23 +2,19 @@ class Solution {
 public:
     vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
         string current = "";
-        multiset<string> store;
         vector<string> temp;
         vector<vector<string>> ans;
+        sort(products.begin(), products.end());
         for(auto ch : searchWord)
         {
             current += ch;
-            store.clear();
+            temp.clear();
             for(auto it : products)
             {
                 if(it.substr(0, current.length()) == current)
-                    store.insert(it);
-            }
-            temp.clear();
-            for(int i=0; i<3 and !store.empty(); i++)
-            {
-                temp.push_back(*store.begin());
-                store.erase(store.begin());
+                    temp.push_back(it);
+                if(temp.size() == 3)
+                    break;
             }
             ans.push_back(temp);
         }
