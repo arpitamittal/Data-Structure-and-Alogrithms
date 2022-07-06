@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int fib(int n) {
+    int fib(int n) 
+    {
         unordered_map<int,int>mp;
         return nFib(n,mp);
     }
@@ -11,7 +12,7 @@ public:
         
         int currentkey = num;
         if(mp.find(currentkey) != mp.end())
-            return mp[num];
+            return mp[currentkey];
         
         int a = nFib(num-1, mp);
         int b = nFib(num-2, mp);
